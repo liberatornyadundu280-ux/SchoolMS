@@ -1,13 +1,19 @@
 // Run with: node seed.js
 // Creates the first admin account so you can log in and start creating
 // teacher/student/parent accounts from the admin dashboard.
-require('dotenv').config();
+const path = require('path');
+require('dotenv').config({ path: path.join(__dirname, '.env') });
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const User = require('./models/User');
 
 const run = async () => {
-  await mongoose.connect(process.env.MONGO_URI);
+  const mongoUri = process.env.MONGO_URI;
+  if (!mongoUri) {
+    throw new Error('MONGO_URI is missing. Set it in backend/.env before running the seed script.');
+  }
+
+  await mongoose.connect(mongoUri);
 
   const existing = await User.findOne({ email: 'admin@school.com' });
   if (existing) {

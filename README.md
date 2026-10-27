@@ -51,6 +51,7 @@ MONGO_URI=your_mongodb_atlas_connection_string
 JWT_SECRET=any_long_random_string
 CLIENT_URL=http://localhost:5173
 ```
+The backend loads this file from the `backend` directory. Replace the `MONGO_URI` placeholder with your MongoDB connection string.
 
 Create your first admin account:
 ```bash
