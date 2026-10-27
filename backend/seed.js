@@ -8,9 +8,9 @@ const bcrypt = require('bcryptjs');
 const User = require('./models/User');
 
 const run = async () => {
-  const mongoUri = process.env.MONGO_URI;
+  const mongoUri = process.env.MONGO_URI || process.env.MONGO_URL;
   if (!mongoUri) {
-    throw new Error('MONGO_URI is missing. Set it in backend/.env before running the seed script.');
+    throw new Error('MongoDB connection string is missing. Set MONGO_URI or MONGO_URL in backend/.env before running the seed script.');
   }
 
   await mongoose.connect(mongoUri);

@@ -45,10 +45,10 @@ app.use((err, req, res, next) => {
 });
 
 const PORT = process.env.PORT || 5000;
-const mongoUri = process.env.MONGO_URI;
+const mongoUri = process.env.MONGO_URI || process.env.MONGO_URL;
 
 if (!mongoUri) {
-  console.error('MONGO_URI is missing. Set it in backend/.env before starting the server.');
+  console.error('MongoDB connection string is missing. Set MONGO_URI or MONGO_URL in the backend environment.');
   process.exit(1);
 }
 

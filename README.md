@@ -94,9 +94,9 @@ Visit `http://localhost:5173`, log in with the admin account, and start creating
 ## Deployment (free tier — same pattern as your other projects)
 
 1. Push this repo to GitHub.
-2. **MongoDB Atlas:** create a free cluster, get the connection string, use it as `MONGO_URI`.
-3. **Backend → Render:** new Web Service, root directory `backend`, build command `npm install`, start command `npm start`. Add the same environment variables from `.env`, with `CLIENT_URL` set to your deployed frontend URL.
-4. **Frontend → Vercel:** new project, root directory `frontend`, framework preset "Vite". Add `VITE_API_URL` pointing to your Render backend URL + `/api`.
+2. **MongoDB Atlas:** create a free cluster and copy its connection string.
+3. **Backend → Render:** new Web Service, root directory `backend`, build command `npm install`, start command `npm start`. In the backend service's Environment settings, add the MongoDB connection string as `MONGO_URI` (or `MONGO_URL`), plus `JWT_SECRET` and `CLIENT_URL` set to your deployed frontend URL. Render does not use your local `.env` file; save the settings and redeploy the service after adding or changing them.
+4. **Frontend → Vercel:** new project, root directory `frontend`, framework preset "Vite". Set `VITE_API_URL` to your Render backend URL plus `/api` (for example, `https://your-service.onrender.com/api`) in Vercel's Environment Variables, then redeploy the frontend. The frontend also appends `/api` if you provide only the server origin.
 5. After both are live, run `node seed.js` once against your production `MONGO_URI` (locally, pointing at Atlas) to create the first admin account.
 
 ## Notes on scope
