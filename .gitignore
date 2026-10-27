@@ -1,0 +1,7 @@
+# Environment files may contain secrets.
+.env
+.env.*
+!.env.example
+# Node modules
+node_modules/
+
